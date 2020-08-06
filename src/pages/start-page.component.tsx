@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import "./start-page.styles.scss";
-import PageNumberForm from "../components/page-number-form.component";
+import PageNumberList from "../components/page-number-list/page-number-list.component";
+import PageNumberForm from "../components/page-number-form/page-number-form.component";
 
 const StartPage = () => {
   const pageNumberList: number[] = [];
@@ -22,8 +23,7 @@ const StartPage = () => {
   return (
     <div className="start-page">
       <h1>Interessante Buchseiten</h1>
-      <h2>Diesen Seiten waren besonders spannend/interessant:</h2>
-
+      <PageNumberList pageNumbers={pageNumbers} />
       <PageNumberForm
         handleOnSubmit={handleOnSubmit}
         handleOnChange={handleOnChange}
