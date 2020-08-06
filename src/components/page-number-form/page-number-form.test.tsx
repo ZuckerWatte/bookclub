@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import PageNumberForm from "./page-number-form.component";
 
-test("submits valid page number input successfully", () => {
+test("submits valid page number input on enter key", () => {
   const handleOnSubmit = jest.fn();
   const handleOnChange = jest.fn();
   const { getByLabelText } = render(
@@ -12,10 +12,26 @@ test("submits valid page number input successfully", () => {
       currentPageNumber=""
     />
   );
-  const pageNumberinput = getByLabelText("Seitenzahl");
+  const pageNumberInput = getByLabelText("Seitenzahl");
 
-  fireEvent.focus(pageNumberinput);
-  fireEvent.change(pageNumberinput, { target: { value: "35" } });
-  fireEvent.submit(pageNumberinput);
+  fireEvent.focus(pageNumberInput);
+  fireEvent.change(pageNumberInput, { target: { value: "35" } });
+  fireEvent.submit(pageNumberInput);
+  expect(handleOnSubmit).toHaveBeenCalledTimes(1);
+});
+
+test("submits valid page number input on button click", () => {
+  const handleOnSubmit = jest.fn();
+  const handleOnChange = jest.fn();
+  const { getByLabelText } = render(
+    <PageNumberForm
+      handleOnSubmit={handleOnSubmit}
+      handleOnChange={handleOnChange}
+      currentPageNumber=""
+    />
+  );
+  const pageNumberButton = getByLabelText("hinzufügen");
+
+  fireEvent.click(pageNumberButton);
   expect(handleOnSubmit).toHaveBeenCalledTimes(1);
 });
